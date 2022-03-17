@@ -1,0 +1,28 @@
+{
+  "name": "sole",
+  "version": "1.0.0",
+  "description": "Ferramenta web de extração de referências .bibtex de artigos da SBC Open Lib desenvolvida em ExpressJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start:dev": "node-dev app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jose-almir/SOLe.git"
+  },
+  "author": "jose-almir",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jose-almir/SOLe/issues"
+  },
+  "homepage": "https://github.com/jose-almir/SOLe#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "bibtex": "^0.9.0",
+    "express": "^4.17.3",
+    "jsdom": "^19.0.0",
+    "node-dev": "^7.2.0"
+  }
+}
