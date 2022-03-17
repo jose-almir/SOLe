@@ -9,10 +9,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("1");
-});
-
 app.post("/api/status", async (req, res) => {
   const obj = {
     ...req.body,
