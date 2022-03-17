@@ -2,77 +2,83 @@ const express = require("express");
 const qs = require("qs");
 const axios = require("axios").default;
 const { JSDOM } = require("jsdom");
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("1");
 });
 
-app.post("/api/extract", (req, res) => {
-  console.log(req.body);
-  res.send("1");
+app.post("/api/status", async (req, res) => {
+  const obj = {
+    ...req.body,
+    isAdvanced: "1",
+    "archiveIds[]": "1",
+    searchPage: 1,
+  };
+
+  const query = qs.stringify(obj);
+
+  try {
+    const results = await axios.get(
+      `https://sol.sbc.org.br/busca/index.php/integrada/results?${query}`
+    );
+    const dom = new JSDOM(results.data);
+
+    const articles =
+      dom.window.document
+        .querySelector(".articles_count")
+        ?.innerHTML.split(" ") ?? [];
+
+    if (articles.length > 0) {
+      const total = +articles[articles.length - 2] ?? 0;
+      const articlesByPage = +articles[2] ?? 0;
+      const pages = Math.ceil(total / articlesByPage) ?? 0;
+      const links = [];
+
+      for (let i = 1; i <= pages; ++i) {
+        const data = { ...obj, searchPage: i };
+        links.push(
+          `https://sol.sbc.org.br/busca/index.php/integrada/results?${qs.stringify(
+            data
+          )}`
+        );
+      }
+
+      res.json({ total, pages, links, query, data: req.body });
+    } else {
+      res.json({ total: 0, pages: 0, links: [], query, data: req.body });
+    }
+  } catch (err) {
+    res.json({ total: 0, pages: 0, links: [], query, data: req.body });
+  }
 });
-// io.on("connection", (socket) => {
-//   const extraction = async (q) => {
-//     const obj = qs.parse(q);
-//     const query = qs.stringify(obj);
-//     const createUrl = (query) =>
-//       `https://sol.sbc.org.br/busca/index.php/integrada/results?${query}`;
-//     try {
-//       let current = 1;
-//       const references = [];
-//       const res = await axios.get(createUrl(query));
-//       const dom = new JSDOM(res.data);
-//       const articlesCount = dom.window.document
-//         .querySelector(".articles_count")
-//         ?.innerHTML?.split(" ");
-//       const total = articlesCount[articlesCount.length - 2];
-//       socket.emit("article-progress", { current, total });
 
-//       const totalPages = Math.ceil(total / 25);
+app.post("/api/extract", async (req, res) => {
+  const { link } = req.body;
+  const references = [];
+  const results = await axios.get(link);
+  const resultsDom = new JSDOM(results.data);
+  const hrefs = resultsDom.window.document.querySelectorAll("a.record_title");
 
-//       for (let i = 1; i <= totalPages; ++i) {
-//         obj.searchPage = i;
-//         const results = await axios.get(createUrl(qs.stringify(obj)));
-//         const resultsDom = new JSDOM(results.data);
-//         const links =
-//           resultsDom.window.document.querySelectorAll("a.record_title");
+  for (let e of hrefs) {
+    const splittedLink = e.href.split("/");
+    const view_number = splittedLink[splittedLink.length - 1];
+    const type_art = splittedLink[4];
+    const link_art = `https://sol.sbc.org.br/index.php/${type_art}/article/cite/${view_number}/BibtexCitationPlugin`;
+    const bibtexPage = await axios.get(link_art);
+    const bibtexDom = new JSDOM(bibtexPage.data);
 
-//         for (let e of links) {
-//           const splittedLink = e.href.split("/");
-//           const view_number = splittedLink[splittedLink.length - 1];
-//           const type_art = splittedLink[4];
-//           const link_art = `https://sol.sbc.org.br/index.php/${type_art}/article/cite/${view_number}/BibtexCitationPlugin`;
-//           const link_abs = e.href;
-//           const bibtexPage = await axios.get(link_art);
-//           const absPage = await axios.get(link_abs);
-//           const bibtexDom = new JSDOM(bibtexPage.data);
-//           const absDom = new JSDOM(absPage.data);
+    const bibtex = bibtexDom.window.document.querySelector("textarea").value;
 
-//           const text =
-//             bibtexDom.window.document.querySelector("textarea").value;
-//           const abst =
-//             absDom.window.document.querySelector("div.abstract").textContent;
-//           console.log(current);
-//           current++;
-//           socket.emit("article-progress", { current, total });
-//         }
-//       }
-//     } catch (error) {
-//       console.log("Deu erro", error);
-//       socket.emit("error-request");
-//     }
-//   };
+    references.push(bibtex);
+  }
 
-//   socket.on("submit-query", extraction);
-
-//   socket.on("disconnect", function () {
-//     socket.offAny(extraction);
-//     socket.disconnect();
-//   });
-// });
+  res.json({ references });
+});
 
 app.listen(process.env.PORT ?? 3000);

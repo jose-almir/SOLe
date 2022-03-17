@@ -1,0 +1,249 @@
+<main class="p-3">
+  <section>
+    <h3>
+      <i class="bi bi-sun-fill text-warning me-1"></i>
+      <a class="link-warning" href="https://sol.sbc.org.br/busca/"
+        >SBC Open Lib</a
+      >
+      Extractor
+    </h3>
+    <hr />
+  </section>
+  <section>
+    <form #queryForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="query"><strong>Busca</strong></label>
+        <input
+          class="form-control bg-dark text-light"
+          placeholder="Busca em qualquer lugar"
+          id="query"
+          name="query"
+          [(ngModel)]="query['query']"
+          required
+        />
+        <small>O tempo de extração depende da biblioteca digital da SBC</small>
+      </div>
+      <div class="mb-3">
+        <div class="row">
+          <div class="col-md">
+            <strong>Início</strong>
+            <div class="row">
+              <div class="col-auto">
+                <select
+                  name="field-7-fromMonth"
+                  class="form-select bg-dark text-light mb-1"
+                  [(ngModel)]="query['field-7-fromMonth']"
+                >
+                  <option label="" value="" selected="selected"></option>
+                  <option label="janeiro" value="01">janeiro</option>
+                  <option label="fevereiro" value="02">fevereiro</option>
+                  <option label="março" value="03">março</option>
+                  <option label="abril" value="04">abril</option>
+                  <option label="maio" value="05">maio</option>
+                  <option label="junho" value="06">junho</option>
+                  <option label="julho" value="07">julho</option>
+                  <option label="agosto" value="08">agosto</option>
+                  <option label="setembro" value="09">setembro</option>
+                  <option label="outubro" value="10">outubro</option>
+                  <option label="novembro" value="11">novembro</option>
+                  <option label="dezembro" value="12">dezembro</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <select
+                  name="field-7-fromDay"
+                  class="form-select bg-dark text-light mb-1"
+                  [(ngModel)]="query['field-7-fromDay']"
+                >
+                  <option label="" value="" selected="selected"></option>
+                  <option *ngFor="let day of days" [value]="day">
+                    {{ day }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <select
+                  name="field-7-fromYear"
+                  class="form-select bg-dark text-light mb-1"
+                  [(ngModel)]="query['field-7-fromYear']"
+                >
+                  <option label="" value="" selected="selected"></option>
+                  <option *ngFor="let year of years" [value]="year">
+                    {{ year }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <strong>Fim</strong>
+            <div class="row">
+              <div class="col-auto">
+                <select
+                  name="field-7-toMonth"
+                  class="form-select bg-dark text-light mb-1"
+                  [(ngModel)]="query['field-7-toMonth']"
+                >
+                  <option label="" value="" selected="selected"></option>
+                  <option label="janeiro" value="01">janeiro</option>
+                  <option label="fevereiro" value="02">fevereiro</option>
+                  <option label="março" value="03">março</option>
+                  <option label="abril" value="04">abril</option>
+                  <option label="maio" value="05">maio</option>
+                  <option label="junho" value="06">junho</option>
+                  <option label="julho" value="07">julho</option>
+                  <option label="agosto" value="08">agosto</option>
+                  <option label="setembro" value="09">setembro</option>
+                  <option label="outubro" value="10">outubro</option>
+                  <option label="novembro" value="11">novembro</option>
+                  <option label="dezembro" value="12">dezembro</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <select
+                  name="field-7-toDay"
+                  class="form-select bg-dark text-light mb-1"
+                  [(ngModel)]="query['field-7-toDay']"
+                >
+                  <option label="" value="" selected="selected"></option>
+                  <option *ngFor="let day of days" [value]="day">
+                    {{ day }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <select
+                  name="field-7-toYear"
+                  class="form-select bg-dark text-light mb-1"
+                  [(ngModel)]="query['field-7-toYear']"
+                >
+                  <option label="" value="" selected="selected"></option>
+                  <option *ngFor="let year of years" [value]="year">
+                    {{ year }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <strong class="d-block">Idioma</strong>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="field-10"
+          id="field-por"
+          [(ngModel)]="query['field-10'][0]"
+          value="por"
+        />
+        <label class="form-check-label" for="field-por"> Português </label>
+      </div>
+
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="field-10"
+          id="field-eng"
+          [(ngModel)]="query['field-10'][1]"
+          value="eng"
+        />
+        <label class="form-check-label" for="field-eng"> Inglês </label>
+      </div>
+
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="field-10"
+          [(ngModel)]="query['field-10'][2]"
+          value="spa"
+          id="field-spa"
+        />
+        <label class="form-check-label" for="field-spa"> Espanhol </label>
+      </div>
+
+      <button
+        [disabled]="!queryForm.valid || isLoading"
+        id="extract-button"
+        class="btn btn-warning btn-log mt-3"
+      >
+        <span
+          class="spinner-grow spinner-grow-sm"
+          [class.d-none]="!isLoading"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        {{ isLoading ? "Extraindo" : "Extrair" }}
+      </button>
+    </form>
+  </section>
+  <hr />
+  <section id="extract-section" class="mt-3">
+    <div [class.d-none]="!hasResults">
+      <label for="refs" class="d-flex justify-content-between">
+        <strong>Resultados ({{ total }} extraídos)</strong>
+        <div>
+          <button
+            class="btn btn-warning btn-sm ms-1"
+            ngbTooltip="Copiar"
+            ngxClipboard
+            [cbContent]="refs"
+          >
+            <i class="bi bi-clipboard-fill"></i>
+          </button>
+          <button
+            class="btn btn-warning btn-sm ms-1"
+            ngbTooltip="Exportar"
+            (click)="export()"
+          >
+            <i class="bi bi-download"></i>
+          </button>
+        </div>
+      </label>
+      <textarea
+        id="refs"
+        class="form-control mt-1 bg-dark text-light"
+        rows="10"
+        readonly
+        >{{ refs }}</textarea
+      >
+    </div>
+    <div>
+      <div class="text-center" [class.d-none]="!isLoading">
+        <div class="progress">
+          <div
+            class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+            [ngStyle]="{ width: percentage }"
+          ></div>
+        </div>
+        <p>{{ progressText }}</p>
+      </div>
+      <div [class.d-none]="!isEmpty">
+        <p class="text-center">Nenhum artigo encontrado.</p>
+      </div>
+    </div>
+    <div [class.d-none]="!hasError">
+      <p class="text-center">Um erro ocorreu tente novamente.</p>
+    </div>
+  </section>
+</main>
+<footer class="container-fluid border-top border-warning mt-1 py-2">
+  <div class="row justify-content-center">
+    <div class="col-sm">
+      ©
+      {{ today.getFullYear() }}
+      SBC e eventos associados
+    </div>
+    <div class="col-auto">
+      <a href="https://github.com/jose-almir/SOLe" class="link-warning">
+        <i class="bi bi-github"></i>
+      </a>
+
+      <a href="https://github.com/jose-almir" class="link-warning ms-1"
+        >José Almir</a
+      >
+    </div>
+  </div>
+</footer>

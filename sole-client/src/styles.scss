@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$component-active-color: $warning;
+$component-active-bg: $warning;
+$form-check-input-checked-bg-color: $warning;
+$input-focus-border-color: $warning;
+$input-btn-focus-box-shadow: $warning;
+
+
 @import '~bootstrap/scss/bootstrap';
