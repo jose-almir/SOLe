@@ -30,7 +30,7 @@ jobs:
         cache: 'npm'
         cache-dependency-path: sole-client/package-lock.json
     - run: npm ci
-#     - run: npm run test:prod
+    - run: npm run test:prod
     - run: npm run build:prod
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
