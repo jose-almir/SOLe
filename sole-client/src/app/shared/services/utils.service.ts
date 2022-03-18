@@ -47,4 +47,8 @@ export class UtilsService {
 
     return { ...query, 'field-10': langs };
   }
+
+  generateFilename() {
+    return Math.ceil(Math.random() * 1000).toString() + Date.now().toString();
+  }
 }

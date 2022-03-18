@@ -40,9 +40,11 @@ export class AppComponent {
   };
 
   export() {
-    saveAs(new Blob([this.refs], { type: 'text/plain' }), 'export.bibtex', {
-      autoBom: true,
-    });
+    saveAs(
+      new Blob([this.refs], { type: 'text/text' }),
+      `${this.utilsService.generateFilename()}.bibtex`,
+      { autoBom: true }
+    );
   }
 
   onSubmit() {

@@ -3,9 +3,13 @@ const qs = require("qs");
 const axios = require("axios").default;
 const { JSDOM } = require("jsdom");
 const cors = require("cors");
+const helmet = require("helmet");
+const compression = require("compression");
 
 const app = express();
 
+app.use(compression())
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 

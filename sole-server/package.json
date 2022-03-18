@@ -20,8 +20,10 @@
   "homepage": "https://github.com/jose-almir/SOLe#readme",
   "dependencies": {
     "axios": "^0.26.1",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "helmet": "^5.0.2",
     "jsdom": "^19.0.0",
     "node-dev": "^7.2.0",
     "qs": "^6.10.3"
