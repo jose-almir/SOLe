@@ -1,12 +1,11 @@
-<img src="./docs/images/brand.png" align="right" width="32">
+<img src="https://raw.githubusercontent.com/jose-almir/jose-almir.github.io/main/images/SOLe/brand.png" align="right" width="32">
 
 # SOLe
 Ferramenta web de extração de referências bibtex de artigos da SBC Open Lib desenvolvida em ExpressJS
 
 # UI
 
-<img src="./docs/images/view1.png" alt="Screenshot 1"/>
-<center><img src="./docs/images/view2.png" width="200" alt="Screenshot 2"/></center>
+<img src="https://raw.githubusercontent.com/jose-almir/jose-almir.github.io/main/images/SOLe/view1.png" alt="Screenshot 1"/>
 
 # API
 
