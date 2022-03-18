@@ -30,13 +30,13 @@ export class AppComponent {
 
   query: Query = {
     query: '',
-    'field-7-fromDay': '',
-    'field-7-fromMonth': '',
-    'field-7-fromYear': '',
-    'field-7-toDay': '',
-    'field-7-toMonth': '',
-    'field-7-toYear': '',
-    'field-10': [false, false, false],
+    fromDay: '',
+    fromMonth: '',
+    fromYear: '',
+    toDay: '',
+    toMonth: '',
+    toYear: '',
+    langs: [false, false, false],
   };
 
   export() {

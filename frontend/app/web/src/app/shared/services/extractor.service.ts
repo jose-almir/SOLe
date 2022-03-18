@@ -27,13 +27,13 @@ export interface ExtractionResult {
 
 export interface Query {
   query: string;
-  'field-7-fromDay': string;
-  'field-7-fromMonth': string;
-  'field-7-fromYear': string;
-  'field-7-toDay': string;
-  'field-7-toMonth': string;
-  'field-7-toYear': string;
-  'field-10': boolean[] | string[];
+  fromDay: string;
+  fromMonth: string;
+  fromYear: string;
+  toDay: string;
+  toMonth: string;
+  toYear: string;
+  langs: boolean[] | string[];
 }
 
 export interface QueryStatus {

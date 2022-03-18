@@ -34,7 +34,7 @@ export class UtilsService {
   }
 
   prepareQuery(query: Query): Query {
-    const langs = (query['field-10'] as boolean[]).reduce(
+    const langs = (query.langs as boolean[]).reduce(
       (filtered: string[], lang: any, i: number) => {
         if (lang) {
           filtered.push(this.langs[i].id);
@@ -45,7 +45,7 @@ export class UtilsService {
       new Array<string>()
     );
 
-    return { ...query, 'field-10': langs };
+    return { ...query, langs };
   }
 
   generateFilename() {

@@ -18,7 +18,7 @@
           placeholder="Busca em qualquer lugar"
           id="query"
           name="query"
-          [(ngModel)]="query['query']"
+          [(ngModel)]="query.query"
           required
         />
         <small>O tempo de extração depende da biblioteca digital da SBC</small>
@@ -30,9 +30,9 @@
             <div class="row">
               <div class="col-auto">
                 <select
-                  name="field-7-fromMonth"
+                  name="fromMonth"
                   class="form-select bg-dark text-light mb-1"
-                  [(ngModel)]="query['field-7-fromMonth']"
+                  [(ngModel)]="query.fromMonth"
                 >
                   <option label="" value="" selected="selected"></option>
                   <option label="janeiro" value="01">janeiro</option>
@@ -51,9 +51,9 @@
               </div>
               <div class="col-auto">
                 <select
-                  name="field-7-fromDay"
+                  name="fromDay"
                   class="form-select bg-dark text-light mb-1"
-                  [(ngModel)]="query['field-7-fromDay']"
+                  [(ngModel)]="query.fromDay"
                 >
                   <option label="" value="" selected="selected"></option>
                   <option *ngFor="let day of days" [value]="day">
@@ -63,9 +63,9 @@
               </div>
               <div class="col-auto">
                 <select
-                  name="field-7-fromYear"
+                  name="fromYear"
                   class="form-select bg-dark text-light mb-1"
-                  [(ngModel)]="query['field-7-fromYear']"
+                  [(ngModel)]="query.fromYear"
                 >
                   <option label="" value="" selected="selected"></option>
                   <option *ngFor="let year of years" [value]="year">
@@ -80,9 +80,9 @@
             <div class="row">
               <div class="col-auto">
                 <select
-                  name="field-7-toMonth"
+                  name="toMonth"
                   class="form-select bg-dark text-light mb-1"
-                  [(ngModel)]="query['field-7-toMonth']"
+                  [(ngModel)]="query.toMonth"
                 >
                   <option label="" value="" selected="selected"></option>
                   <option label="janeiro" value="01">janeiro</option>
@@ -101,9 +101,9 @@
               </div>
               <div class="col-auto">
                 <select
-                  name="field-7-toDay"
+                  name="toDay"
                   class="form-select bg-dark text-light mb-1"
-                  [(ngModel)]="query['field-7-toDay']"
+                  [(ngModel)]="query.toDay"
                 >
                   <option label="" value="" selected="selected"></option>
                   <option *ngFor="let day of days" [value]="day">
@@ -113,9 +113,9 @@
               </div>
               <div class="col-auto">
                 <select
-                  name="field-7-toYear"
+                  name="toYear"
                   class="form-select bg-dark text-light mb-1"
-                  [(ngModel)]="query['field-7-toYear']"
+                  [(ngModel)]="query.toYear"
                 >
                   <option label="" value="" selected="selected"></option>
                   <option *ngFor="let year of years" [value]="year">
@@ -132,9 +132,9 @@
         <input
           class="form-check-input"
           type="checkbox"
-          name="field-10"
+          name="langs"
           id="field-por"
-          [(ngModel)]="query['field-10'][0]"
+          [(ngModel)]="query.langs[0]"
           value="por"
         />
         <label class="form-check-label" for="field-por"> Português </label>
@@ -144,9 +144,9 @@
         <input
           class="form-check-input"
           type="checkbox"
-          name="field-10"
+          name="langs"
           id="field-eng"
-          [(ngModel)]="query['field-10'][1]"
+          [(ngModel)]="query.langs[1]"
           value="eng"
         />
         <label class="form-check-label" for="field-eng"> Inglês </label>
@@ -156,8 +156,8 @@
         <input
           class="form-check-input"
           type="checkbox"
-          name="field-10"
-          [(ngModel)]="query['field-10'][2]"
+          name="langs"
+          [(ngModel)]="query.langs[2]"
           value="spa"
           id="field-spa"
         />
