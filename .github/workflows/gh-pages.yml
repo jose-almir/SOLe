@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: sole-client
+        working-directory: frontend/app/web
 
     strategy:
       matrix:
@@ -28,7 +28,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: sole-client/package-lock.json
+        cache-dependency-path: frontend/app/web/package-lock.json
     - run: npm ci
     - run: npm run test:prod
     - run: npm run build:prod
@@ -36,4 +36,4 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         branch: gh-pages
-        folder: sole-client/dist/sole-client
+        folder: frontend/app/web/dist/sole-client
