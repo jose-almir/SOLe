@@ -7,5 +7,4 @@ const apiUrl = String.fromEnvironment(
 
 final config = BaseOptions(
   baseUrl: apiUrl,
-  method: 'POST',
 );

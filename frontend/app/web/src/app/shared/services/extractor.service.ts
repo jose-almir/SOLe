@@ -40,6 +40,6 @@ export interface QueryStatus {
   total: number;
   pages: number;
   links: string[];
-  query: string[];
+  query: string;
   data: Query;
 }

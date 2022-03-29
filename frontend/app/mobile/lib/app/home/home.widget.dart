@@ -15,6 +15,9 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("SBC Open Lib Extractor"),
+      ),
       body: Text(controller.counter.toString()),
     );
   }
