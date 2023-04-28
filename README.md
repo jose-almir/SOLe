@@ -1,12 +1,12 @@
-<img src="https://raw.githubusercontent.com/jose-almir/jose-almir.github.io/main/images/SOLe/brand.png" align="right" width="32">
+<img src="https://user-images.githubusercontent.com/50648379/235163065-b8a5e6cc-699c-45ed-9e6f-86c6881aa4b5.svg" align="right" width="48">
 
 # SOLe
-Ferramenta web de extração de referências bibtex de artigos da SBC Open Lib desenvolvida em ExpressJS
+Web tool for extracting bibtex references from SBC Open Lib articles developed in ExpressJS and Angular
 
-# UI
+# Preview
 
-<img src="https://raw.githubusercontent.com/jose-almir/jose-almir.github.io/main/images/SOLe/view1.png" alt="Screenshot 1"/>
+<img src="https://user-images.githubusercontent.com/50648379/235162084-64f7e2a2-cf5e-4bd5-b2f5-b91867115e78.jpg" width="800"/>
 
 # API
 
-[Documentação da API no Postman](https://documenter.getpostman.com/view/19006302/UVsPPQ2t)
+[API documentation in Postman](https://documenter.getpostman.com/view/19006302/UVsPPQ2t)
